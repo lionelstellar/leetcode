@@ -1,17 +1,24 @@
+"""
+dfs
+"""
 class Solution:
     def combinationSum(self, candidates: list[int], target: int) -> list[list[int]]:
-        ret = []
 
-        def recursion(res, candidates, target):
-            for elem in candidates:
-                if elem == target:
-                    for res_item in res:
-                        res_item.append(elem)
-                        return res
+        res = []
 
-                elif elem < target:
-                    for res_item in res:
-                        res_item += recursion(res, candidates, target - elem)
+        def dfs(i, cur, total):
+            if total == target:
+                res.append(cur)
+                return
+            if total > target:
+                return
+            for j in range(i, len(candidates)):
+                dfs(j, cur + [candidates[j]], total + candidates[j])
+
+        dfs(0, [], 0)
+        return res
+
+
 
 
 
