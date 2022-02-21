@@ -1,4 +1,5 @@
 """
+LCS+逆推路径 + max（up, left）求和，部分test case通过，没有AC
 """
 class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
@@ -9,7 +10,7 @@ class Solution:
         for i in range(1, m + 1):
             for j in range(1, n + 1):
                 if word1[i - 1] == word2[j - 1]:
-                    dp[i][j] = dp[i - 1][j - 1] + 1
+                    dp[i][j] = min(dp[i - 1][j - 1] + 1)
                 else:
                     dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
 
@@ -17,7 +18,7 @@ class Solution:
 
         def dfs(n, i, j, up, left):
             if n == 0:
-                return 0
+                return max(i, j)
             if word1[i - 1] == word2[j - 1] and dp[i][j] == dp[i - 1][j - 1] + 1:
                 return max(up, left) + dfs(n - 1, i - 1, j - 1, 0, 0)
             if dp[i][j] == dp[i - 1][j] and dp[i][j] == dp[i][j - 1]:
@@ -39,6 +40,9 @@ sol = Solution()
 word1 = "horse"
 word2 = "ros"
 
-word1 = "intention"
-word2 = "execution"
+# word1 = "intention"
+# word2 = "execution"
+
+word1 = "teacher"
+word2 = "botcher"
 print(sol.minDistance(word1, word2))
