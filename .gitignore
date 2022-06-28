@@ -3,3 +3,7 @@ bytedance/*
 .idea/*
 venv/*
 asignment/*
+src.iml
+test/*
+DemoMain
+src.main.java/*
